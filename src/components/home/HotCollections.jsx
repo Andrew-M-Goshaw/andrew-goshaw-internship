@@ -32,7 +32,7 @@ const HotCollections = () => {
   }, []);
 
   return (
-    <section id="section-collections" className="no-bottom" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="250">
+    <section id="section-collections" className="no-bottom" data-aos="fade-up" data-aos-duration="400" data-aos-delay="250">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

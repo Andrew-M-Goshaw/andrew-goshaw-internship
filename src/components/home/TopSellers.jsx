@@ -31,7 +31,7 @@ const TopSellers = () => {
   }, []);
 
   return (
-    <section id="section-popular" className="pb-5" data-aos="zoom-in" data-aos-duration="1500">
+    <section id="section-popular" className="pb-5" data-aos="zoom-in" data-aos-duration="200">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

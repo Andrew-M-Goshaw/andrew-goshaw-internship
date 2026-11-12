@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
 
 function NewItem({ item }) {
   const { expiryDate } = item;
@@ -29,13 +30,14 @@ function NewItem({ item }) {
     const interval = setInterval(() => {
       setTimeLeft(getTimeRemaining(expiryDate));
     }, 1000);
+    AOS.init();
     return () => clearInterval(interval);
   }, [expiryDate]);
 
   console.log({ item });
 
   return (
-    <div className="nft__item">
+    <div className="nft__item" data-aos="zoom-in" data-aos-duration="400">
       <div className="author_list_pp">
         <Link
           to={`/author/${item.authorId}`}

@@ -8,7 +8,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import Skeleton from "../UI/Skeleton";
 import axios from "axios";
 import NewItem from "../UI/NftCard";
-import AOS from 'aos';
+import AOS from "aos";
 
 const NewItems = () => {
   const [items, setItems] = React.useState([]);
@@ -34,7 +34,7 @@ const NewItems = () => {
   }, []);
 
   return (
-    <section id="section-items" className="no-bottom" data-aos="fade-up" data-aos-duration="1500">
+    <section id="section-items" className="no-bottom" data-aos="fade-up" data-aos-duration="200">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
