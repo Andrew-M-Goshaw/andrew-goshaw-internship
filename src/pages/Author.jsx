@@ -36,6 +36,7 @@ const Author = () => {
 
         const data = await response.json();
         setAuthorData(data);
+        setFollowerCount(data.followers);
       } catch (error) {
         console.error("Error fetching author data:", error);
       } finally {
@@ -147,16 +148,6 @@ const Author = () => {
                 ) : (
                   <p>Unable to load this author.</p>
                 )}
-                <div className="profile_follow de-flex">
-                  <div className="de-flex-col">
-                    <div className="profile_follower">
-                      {authorData.followers} followers
-                    </div>
-                    <Link to="#" className="btn-main" onClick={handleFollow}>
-                      {isFollowing ? "unfollow" : "Follow"}
-                    </Link>
-                  </div>
-                </div>
               </div>
             </div>
 

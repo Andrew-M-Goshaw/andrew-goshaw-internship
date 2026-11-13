@@ -1,24 +1,30 @@
-import React, {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
-const AuthorItems = ({authorData}) => {
-
+const AuthorItems = ({ authorData }) => {
   return (
     <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
           {authorData?.nftCollection?.map((item) => (
-              <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.nftId}>
-            <Link key={authorData.id} to={`/author/${authorData.id}`}>
-              {authorData.name}
-            </Link>
+            <div
+              className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+              key={item.nftId}
+            >
+              <Link key={authorData.id} to={`/author/${authorData.id}`}>
+                {authorData.name}
+              </Link>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link to="">
-                    <img className="lazy" src={authorData.authorImage} alt={authorData.authorName} />
+                    <img
+                      className="lazy"
+                      src={authorData.authorImage}
+                      alt={authorData.authorName}
+                    />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
@@ -41,10 +47,11 @@ const AuthorItems = ({authorData}) => {
                     </div>
                   </div>
                   <Link to={`/item-details/${item.nftId}`}>
+                    <h4>{item.title}</h4>
                     <img
                       src={item.nftImage}
                       className="lazy nft__item_preview"
-                      alt={item.title}
+                      alt=""
                     />
                   </Link>
                 </div>

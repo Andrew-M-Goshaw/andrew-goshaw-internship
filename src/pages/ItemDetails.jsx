@@ -25,11 +25,11 @@ const ItemDetails = () => {
       }
     };
     fetchNftDetails();
-  }, []);
+  }, [nftId]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [nftId]);
+  }, []);
 
   return (
     <div id="wrapper">
