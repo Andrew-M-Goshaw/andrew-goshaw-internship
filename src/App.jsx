@@ -8,9 +8,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import "aos/dist/aos.css";
 
-
 function App() {
-  
   return (
     <Router>
       <Nav />

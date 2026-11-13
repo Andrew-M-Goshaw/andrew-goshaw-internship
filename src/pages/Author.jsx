@@ -46,6 +46,7 @@ const Author = () => {
     if (authorId) {
       fetchAuthorData();
     }
+
     AOS.init();
   }, [authorId]); // The effect depends on the author ID
 
@@ -66,50 +67,86 @@ const Author = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <div className="d_profile de-flex">
-                  <div className="de-flex-col">
-                    {loading ? (
-                      <Skeleton
-                        width="150px"
-                        height="150px"
-                        borderRadius="50%"
-                      />
-                    ) : authorData ? (
-                      <img
-                        className="profile_avatar"
-                        src={authorData.authorImage}
-                        alt={authorData.authorName}
-                      />
-                    ) : (
-                      <p> Unable to load this author. </p>
-                    )}
-                    /* Render AuthorItems only when loading is false and
-                    authorDetails is available */
-                    {!loading && authorData && (
-                      <AuthorItems authorData={authorData} />
-                    )}
-                    <i className="fa fa-check"></i>
-                    <div className="profile_name">
-                      <h4 data-aos="zoom-in-up" data-aos-duration="500">
-                        {authorData.authorName}
-                        <span className="profile_username">
-                          @{authorData.tag}
-                        </span>
-                        <span id="wallet" className="profile_wallet">
-                          {authorData.address}
-                        </span>
-                        <button
-                          id="btn_copy"
-                          title="Copy Text"
-                          data-aos="zoom-in-up"
-                          data-aos-duration="500"
-                        >
-                          Copy
-                        </button>
-                      </h4>
+                {loading ? (
+                  <div className="d_profile de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <Skeleton
+                          width="150px"
+                          height="150px"
+                          borderRadius="50%"
+                        />
+
+                        <div className="profile_name">
+                          <h4>
+                            <Skeleton width="200px" height="24px" />
+
+                            <span className="profile_username">
+                              <Skeleton width="100px" height="20px" />
+                            </span>
+
+                            <span className="profile_wallet">
+                              <Skeleton width="250px" height="20px" />
+                            </span>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="profile_follow de-flex">
+                      <Skeleton width="150px" height="40px" />
                     </div>
                   </div>
-                </div>
+                ) : authorData ? (
+                  <div className="d_profile de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <img
+                          src={authorData.authorImage}
+                          alt={authorData.authorName}
+                        />
+
+                        <i className="fa fa-check"></i>
+
+                        <div className="profile_name">
+                          <h4>
+                            {authorData.authorName}
+
+                            <span className="profile_username">
+                              @{authorData.tag}
+                            </span>
+
+                            <span id="wallet" className="profile_wallet">
+                              {authorData.address}
+                            </span>
+
+                            <button id="btn_copy" title="Copy Text">
+                              Copy
+                            </button>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="profile_follow de-flex">
+                      <div className="de-flex-col">
+                        <div className="profile_follower">
+                          {followerCount} followers
+                        </div>
+
+                        <Link
+                          to="#"
+                          className="btn-main"
+                          onClick={handleFollow}
+                        >
+                          {isFollowing ? "Unfollow" : "Follow"}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <p>Unable to load this author.</p>
+                )}
                 <div className="profile_follow de-flex">
                   <div className="de-flex-col">
                     <div className="profile_follower">
