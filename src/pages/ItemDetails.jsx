@@ -4,6 +4,7 @@ import axios from "axios";
 import EthImage from "../images/ethereum.svg";
 import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
+import Skeleton from "../components/UI/Skeleton";
 
 const ItemDetails = () => {
   const [nftDetails, setNftDetails] = useState(null);
@@ -28,11 +29,7 @@ const ItemDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  }, [nftId]);
 
   return (
     <div id="wrapper">
@@ -42,11 +39,39 @@ const ItemDetails = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-6 text-center">
-                <img
-                  src={nftDetails.nftImage}
-                  className="img-fluid img-rounded mb-sm-30 nft-image"
-                  alt={nftDetails.title}
-                />
+                {loading ? (
+                  <div>
+                    <Skeleton width="100%" height="200px" />{" "}
+                    {/* Placeholder for NFT Image */}
+                    <Skeleton width="80%" height="30px" />{" "}
+                    {/* Placeholder for Title */}
+                    <Skeleton width="60%" height="20px" />{" "}
+                    {/* Placeholder for Stats */}
+                    <Skeleton width="100%" height="20px" />{" "}
+                    {/* Placeholder for Description */}
+                    <Skeleton width="40%" height="20px" />{" "}
+                    {/* Placeholder for Owner */}
+                    <Skeleton width="40%" height="20px" />{" "}
+                    {/* Placeholder for Creator */}
+                    <Skeleton width="20%" height="20px" />{" "}
+                    {/* Placeholder for Price */}
+                  </div>
+                ) : (
+                  <div>
+                    <img
+                      src={nftDetails.nftImage}
+                      className="img-fluid img-rounded mb-sm-30 nft-image"
+                      alt={nftDetails.title}
+                    />
+                    <h2>{nftDetails.title}</h2>
+                    <p>{nftDetails.stats}</p>
+                    <p>{nftDetails.description}</p>
+                    <p>Owner: {nftDetails.owner}</p>
+                    <p>Creator: {nftDetails.creator}</p>
+                    <p>Price: {nftDetails.price}</p>
+                   
+                  </div>
+                )}
               </div>
               <div className="col-md-6">
                 <div className="item_info">

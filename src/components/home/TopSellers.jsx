@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
-import AOS from 'aos';
+import AOS from "aos";
 
 const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([]);
@@ -31,7 +31,12 @@ const TopSellers = () => {
   }, []);
 
   return (
-    <section id="section-popular" className="pb-5" data-aos="zoom-in" data-aos-duration="1500">
+    <section
+      id="section-popular"
+      className="pb-5"
+      data-aos="zoom-in"
+      data-aos-duration="1500"
+    >
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
@@ -66,7 +71,9 @@ const TopSellers = () => {
                       </Link>
                     </div>
                     <div className="author_list_info">
-                      <Link to={`/author/${seller.authorId}`}></Link>
+                      <Link to={`/author/${seller.authorId}`}>
+                        {seller.authorName}
+                      </Link>
                       <span>{seller.price ?? 0} ETH</span>
                     </div>
                   </li>

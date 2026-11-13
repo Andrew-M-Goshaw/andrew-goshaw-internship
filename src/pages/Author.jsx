@@ -5,6 +5,7 @@ import AuthorItems from "../components/author/AuthorItems";
 import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import AOS from "aos";
+import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
   const { authorId } = useParams(); // Get the author ID from the URL
@@ -48,10 +49,6 @@ const Author = () => {
     AOS.init();
   }, [authorId]); // The effect depends on the author ID
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -71,51 +68,64 @@ const Author = () => {
               <div className="col-md-12">
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
-                    <div className="profile_avatar">
+                    {loading ? (
+                      <Skeleton
+                        width="150px"
+                        height="150px"
+                        borderRadius="50%"
+                      />
+                    ) : authorData ? (
                       <img
+                        className="profile_avatar"
                         src={authorData.authorImage}
                         alt={authorData.authorName}
                       />
-
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
-                        <h4 data-aos="zoom-in-up" data-aos-duration="500">
-                          {authorData.authorName}
-                          <span className="profile_username">
-                            @{authorData.tag}
-                          </span>
-                          <span id="wallet" className="profile_wallet">
-                            {authorData.address}
-                          </span>
-                          <button
-                            id="btn_copy"
-                            title="Copy Text"
-                            data-aos="zoom-in-up"
-                            data-aos-duration="500"
-                          >
-                            Copy
-                          </button>
-                        </h4>
-                      </div>
+                    ) : (
+                      <p> Unable to load this author. </p>
+                    )}
+                    /* Render AuthorItems only when loading is false and
+                    authorDetails is available */
+                    {!loading && authorData && (
+                      <AuthorItems authorData={authorData} />
+                    )}
+                    <i className="fa fa-check"></i>
+                    <div className="profile_name">
+                      <h4 data-aos="zoom-in-up" data-aos-duration="500">
+                        {authorData.authorName}
+                        <span className="profile_username">
+                          @{authorData.tag}
+                        </span>
+                        <span id="wallet" className="profile_wallet">
+                          {authorData.address}
+                        </span>
+                        <button
+                          id="btn_copy"
+                          title="Copy Text"
+                          data-aos="zoom-in-up"
+                          data-aos-duration="500"
+                        >
+                          Copy
+                        </button>
+                      </h4>
                     </div>
                   </div>
-                  <div className="profile_follow de-flex">
-                    <div className="de-flex-col">
-                      <div className="profile_follower">
-                        {authorData.followers} followers
-                      </div>
-                      <Link to="#" className="btn-main" onClick={handleFollow}>
-                        {isFollowing ? "unfollow" : "Follow"}
-                      </Link>
+                </div>
+                <div className="profile_follow de-flex">
+                  <div className="de-flex-col">
+                    <div className="profile_follower">
+                      {authorData.followers} followers
                     </div>
+                    <Link to="#" className="btn-main" onClick={handleFollow}>
+                      {isFollowing ? "unfollow" : "Follow"}
+                    </Link>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="col-md-12">
-                <div className="de_tab tab_simple">
-                  <AuthorItems authorData={authorData} />
-                </div>
+            <div className="col-md-12">
+              <div className="de_tab tab_simple">
+                <AuthorItems authorData={authorData} />
               </div>
             </div>
           </div>
